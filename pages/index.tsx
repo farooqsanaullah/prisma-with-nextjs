@@ -14,7 +14,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className="mt-10">
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
@@ -25,6 +25,7 @@ export default function Home() {
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
               target="_blank"
               rel="noopener noreferrer"
+              className="bg-slate-50"
             >
               By{' '}
               <Image
