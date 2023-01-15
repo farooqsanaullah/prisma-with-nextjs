@@ -1,8 +1,5 @@
-import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
-import { format } from "path";
 import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -12,17 +9,41 @@ interface FormData {
   id: string;
 }
 export default function Home() {
-  const [form, setForm] = useState<FormData>({
+  const defaultForm = {
     id: "",
     title: "",
     content: "",
-  });
+  };
+  const [form, setForm] = useState<FormData>(defaultForm);
+
+  async function create(data: FormData) {
+    console.log(`data `, data);
+    try {
+      fetch("http://localhost:3000/api/create", {
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }).then(() => setForm(defaultForm));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const handleSubmit = async (data: FormData) => {
+    try {
+      create(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <h1 className="text-center font-bold text-2xl mt-4">Notes</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          handleSubmit(form);
         }}
         className="w-auto min-w-[25%] max-w-min mx-auto space-y-6 flex flex-col item-stretch"
       >
